@@ -1,4 +1,4 @@
-/snap/clion/180/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/180/bin/ninja/linux/ninja -G Ninja /home/ander/repos/IVS/1/assignment
+/snap/clion/180/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/180/bin/ninja/linux/ninja -G Ninja /home/ander/repos/IVS/assignment
 CMake Deprecation Warning at CMakeLists.txt:11 (cmake_minimum_required):
   Compatibility with CMake < 2.8.12 will be removed from a future version of
   CMake.
@@ -7,17 +7,19 @@ CMake Deprecation Warning at CMakeLists.txt:11 (cmake_minimum_required):
   CMake that the project does not need compatibility with older versions.
 
 
-CMake Deprecation Warning at CMakeLists.txt:11 (cmake_minimum_required):
-  Compatibility with CMake < 2.8.12 will be removed from a future version of
-  CMake.
-
-  Update the VERSION argument <min> value or use a ...<max> suffix to tell
-  CMake that the project does not need compatibility with older versions.
-
-
-CMake Error: CMake was unable to find a build program corresponding to "Ninja".  CMAKE_MAKE_PROGRAM is not set.  You probably need to select a different build tool.
--- Configuring incomplete, errors occurred!
-See also "/home/ander/repos/IVS/1/assignment/cmake-build-debug/googletest/CMakeFiles/CMakeOutput.log".
+-- The C compiler identification is GNU 9.3.0
+-- The CXX compiler identification is GNU 9.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Error: The current CMakeCache.txt directory /home/ander/repos/IVS/assignment/cmake-build-debug/googletest/CMakeCache.txt is different than the directory /home/ander/repos/IVS/1/assignment/cmake-build-debug/googletest where CMakeCache.txt was created. This may result in binaries being created in the wrong place. If you are not sure, reedit the CMakeCache.txt
 CMake Error at GoogleTest.cmake:50 (message):
   CMake step for googletest failed: 1
 Call Stack (most recent call first):
@@ -25,4 +27,4 @@ Call Stack (most recent call first):
 
 
 -- Configuring incomplete, errors occurred!
-See also "/home/ander/repos/IVS/1/assignment/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/home/ander/repos/IVS/assignment/cmake-build-debug/CMakeFiles/CMakeOutput.log".
