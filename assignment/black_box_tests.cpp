@@ -46,16 +46,16 @@ protected:
     Node_t *rootSmall, *rootLarge;
 };
 
-class TreeAxioms : public NonEmptyTree {};
+class TreeAxioms : public NonEmptyTree {}; // For test suite naming prescription
 
 // Pozn.: v zadaní je uvedené pomenovávanie testov s podtržítkom 'InsertNode_XXX' (str. 7),
 // ale v GoogleTest GitHub doc je priamo spomenuté, že konvencia je podtržítka v názvoch
 // testov nepoužívať
 // https://github.com/google/googletest/blob/main/docs/primer.md#simple-tests
 
-
 //============================================================================//
 // Testing Red-Black Tree interface
+
 
 // Tests Insert method conducted for empty tree
 TEST_F(EmptyTree, InsertNode) {
@@ -279,23 +279,77 @@ TEST_F(NonEmptyTree, FindNode_large) {
 //============================================================================//
 // Testing Red-Black Tree axioms
 //
-// This tests rely on a correct implementation of InsertNode method for NON-empty tree
-// which was tested above
+// These tests rely on a correct implementation of InsertNode method for empty and
+// NON-empty tree, which was tested above
+// These tests might crash with seg fault if some tests of InsertNode above fail
+
 
 // Tests 1. axiom: All leaf nodes are considered black.
-TEST(TreeAxioms, Axiom1) {
+TEST_F(TreeAxioms, Axiom1) {
+    vector<Node_t *> nodes = {
+            rootLarge->pLeft->pLeft->pLeft,
+            rootLarge->pLeft->pRight,
+            rootLarge->pRight->pLeft,
+            rootLarge->pRight->pRight->pLeft,
+            rootLarge->pRight->pRight->pRight
+    };
 
+    // Iterate through all n-1 height nodes with no children to test their children (leaves) colors
+    for (Node_t *node: nodes) {
+        EXPECT_EQ(node->pLeft->color, Color_t::BLACK);
+        EXPECT_EQ(node->pRight->color, Color_t::BLACK);
+    }
+
+    // Check nodes with one child and one leaf node (only one of that kind exists)
+    EXPECT_EQ(rootLarge->pLeft->pLeft->pRight->color, Color_t::BLACK);
 }
 
 // Tests 2. axiom: A red node does not have a red child.
-TEST(TreeAxioms, Axiom2) {
+TEST_F(TreeAxioms, Axiom2) {
+    vector<Node_t *> redNodes = {
+            rootLarge->pLeft,
+            rootLarge->pRight,
+            rootLarge->pLeft->pLeft->pLeft,
+            rootLarge->pRight->pRight->pRight,
+            rootLarge->pRight->pRight->pLeft,
+    };
 
+    // Iterate through all red nodes and test their children colors
+    for (Node_t *redNode: redNodes) {
+        EXPECT_EQ(redNode->pLeft->color, Color_t::BLACK);
+        EXPECT_EQ(redNode->pRight->color, Color_t::BLACK);
+    }
 }
 
 // Tests 3. axiom: Every path from a given node to any of its descendant
 // leave nodes goes through the same number of black nodes.
-TEST(TreeAxioms, Axiom3) {
+TEST_F(TreeAxioms, Axiom3) {
+    vector<Node_t *> redNodes = {
+            rootLarge->pLeft,
+            rootLarge->pRight,
+            rootLarge->pLeft->pLeft->pLeft,
+            rootLarge->pRight->pRight->pRight,
+            rootLarge->pRight->pRight->pLeft
+    };
 
+    vector<Node_t *> blackNodes = {
+            rootLarge,
+            rootLarge->pRight->pRight,
+            rootLarge->pLeft->pLeft,
+            rootLarge->pRight->pLeft,
+            rootLarge->pLeft->pRight
+    };
+
+    // Test correct color of all (except leaves - which we already tested) nodes, which
+    // will ensure 3rd axiom
+    for (Node_t *redNode: redNodes) {
+        EXPECT_EQ(redNode->color, Color_t::RED);
+        EXPECT_EQ(redNode->color, Color_t::RED);
+    }
+    for (Node_t *blackNode: blackNodes) {
+        EXPECT_EQ(blackNode->color, Color_t::BLACK);
+        EXPECT_EQ(blackNode->color, Color_t::BLACK);
+    }
 }
 
 /*** Konec souboru black_box_tests.cpp ***/
