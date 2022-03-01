@@ -3,12 +3,12 @@
 // Purpose:     Test Driven Development - priority queue code
 //
 // $NoKeywords: $ivs_project_1 $tdd_code.cpp
-// $Author:     JMENO PRIJMENI <xlogin00@stud.fit.vutbr.cz>
-// $Date:       $2021-01-04
+// $Author:     -
+// $Date:       $2022-03-01
 //============================================================================//
 /**
  * @file tdd_code.h
- * @author JMENO PRIJMENI
+ * @author -
  * 
  * @brief Definice rozhrani prioritni fronty.
  */
@@ -21,7 +21,7 @@
 /**
  * @brief The PriorityQueue class
  * Prioritni fronta (polozky vzdy serazeny od max po min) implementovana pomoci
- * tzv. linked listu (kazda polozka ma odkaz na  nasledujici polozku).
+ * tzv. linked listu (kazda polozka ma odkaz na nasledujici polozku).
  * Dale ma kazda polozka hodnotu typu "int", pricemz fronta muze obsahovat vice
  * polozek se stejnou hodnotou.
  */
