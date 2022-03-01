@@ -3,12 +3,12 @@
 // Purpose:     White Box - Tests suite
 //
 // $NoKeywords: $ivs_project_1 $white_box_code.cpp
-// $Author:     JMENO PRIJMENI <xlogin00@stud.fit.vutbr.cz>
-// $Date:       $2021-01-04
+// $Author:     Andrej Pavlovič <xpavlo14@stud.fit.vutbr.cz>
+// $Date:       $2022-03-01
 //============================================================================//
 /**
  * @file white_box_tests.cpp
- * @author JMENO PRIJMENI
+ * @author Andrej Pavlovič
  * 
  * @brief Implementace testu prace s maticemi.
  */

@@ -3,12 +3,12 @@
 // Purpose:     White Box - matrix class code
 //
 // $NoKeywords: $ivs_project_1 $white_box_code.cpp
-// $Author:     Andrej Pavlovič <xpavlo14@stud.fit.vutbr.cz>
-// $Date:       $2022-02-27
+// $Author:     -
+// $Date:       $2022-03-01
 //============================================================================//
 /**
  * @file white_box_code.cpp
- * @author Andrej Pavlovič
+ * @author -
  * 
  * @brief Definice metod tridy reprezentujici matici.
  */
