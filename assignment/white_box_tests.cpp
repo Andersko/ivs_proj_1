@@ -164,4 +164,17 @@ TEST_F(MatrixPreset, setMultiple) {
     }));
 }
 
+// Test get
+TEST_F(MatrixPreset, get) {
+    EXPECT_EQ(small.get(0, 0), 0);
+    EXPECT_EQ(medium.get(1, 0), -9);
+    EXPECT_EQ(medium.get(0, 2), -8);
+    EXPECT_EQ(large.get(1, 1), 1.1);
+    EXPECT_EQ(large.get(2, 2), -3);
+
+    EXPECT_ANY_THROW(small.get(-1, 0));
+    EXPECT_ANY_THROW(medium.get(1, 8));
+    EXPECT_ANY_THROW(large.get(1, 188));
+}
+
 /*** Konec souboru white_box_tests.cpp ***/
