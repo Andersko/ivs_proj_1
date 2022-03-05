@@ -47,11 +47,9 @@ void PriorityQueue::Insert(int value)
     } else {
         Element_t *pLast, *pNext = this->m_pHead;
 
-        while ((pLast = pNext, pNext = pNext->pNext)) {
-            if (value >= pNext->value) {
+        while ((pLast = pNext, pNext = pNext->pNext))
+            if (value >= pNext->value)
                 break;
-            }
-        }
 
         pLast->pNext = (Element_t*) malloc(sizeof(Element_t));
         pLast->pNext->pNext = pNext;
