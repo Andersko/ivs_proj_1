@@ -91,7 +91,7 @@ TEST(MatrixConstructor, Matrix_NxM) {
     });
 }
 
-// Test set 1/2
+// Test set() 1/2
 TEST_F(MatrixPreset, setOne) {
     EXPECT_EQ(small.get(0, 0), 0);
     EXPECT_TRUE(small.set(0, 0, -1.0));
@@ -121,7 +121,7 @@ TEST_F(MatrixPreset, setOne) {
     EXPECT_FALSE(large.set(8, 8, -1000498.256));
 }
 
-// Test set 2/2
+// Test set() 2/2
 TEST_F(MatrixPreset, setMultiple) {
     EXPECT_EQ(small.get(0, 0), 0);
     EXPECT_EQ(medium.get(1, 0), -9);
@@ -164,7 +164,7 @@ TEST_F(MatrixPreset, setMultiple) {
     }));
 }
 
-// Test get
+// Test get()
 TEST_F(MatrixPreset, get) {
     EXPECT_EQ(small.get(0, 0), 0);
     EXPECT_EQ(medium.get(1, 0), -9);
@@ -175,6 +175,104 @@ TEST_F(MatrixPreset, get) {
     EXPECT_ANY_THROW(small.get(-1, 0));
     EXPECT_ANY_THROW(medium.get(1, 8));
     EXPECT_ANY_THROW(large.get(1, 188));
+}
+
+// Test operator==()
+TEST_F(MatrixPreset, equalMethod) {
+    EXPECT_NO_THROW({
+        // Compare same size matrices with same values
+        EXPECT_TRUE(small.operator==(small));
+        EXPECT_TRUE(medium.operator==(medium));
+        EXPECT_TRUE(large.operator==(large));
+
+        // Compare same size matrices with different values
+        Matrix small2 = Matrix();
+        Matrix medium2 = Matrix(3, 3);
+        Matrix large2 = Matrix(5, 6);
+
+        small2.set(vector<vector<double>> {{-199.89}});
+
+        // Flip x and y
+        medium2.set(vector<vector<double>> {
+            {4,  -9.0, 18},
+            {3,  -55,  19},
+            {-8, 2,    19},
+        });
+
+        // Change just one value (4, 4)
+        large.set(vector<vector<double>> {
+            {0,         1,             2,             3,     4,        5},
+            {0.0,       1.1,           2.2,           3.3,   4.4,      -999},
+            {-5,        -4,            -3,            -2,    -1,       0},
+            {-1000.01,  16,            16,            23,    -849,     65},
+            {1000000.0, 1000001.10981, -1651556.4444, 19858, -650.789, 0.000001},
+        });
+
+        EXPECT_FALSE(small.operator==(small2));
+        EXPECT_FALSE(medium.operator==(medium2));
+        EXPECT_FALSE(large.operator==(large2));
+    });
+
+    EXPECT_THROW(small.operator==(medium), runtime_error);
+    EXPECT_THROW(small.operator==(large), runtime_error);
+    EXPECT_THROW(medium.operator==(small), runtime_error);
+    EXPECT_THROW(medium.operator==(large), runtime_error);
+    EXPECT_THROW(large.operator==(small), runtime_error);
+    EXPECT_THROW(large.operator==(medium), runtime_error);
+}
+
+// Test operator+()
+TEST_F(MatrixPreset, sumMethod) {
+    EXPECT_NO_THROW({
+        // Matrices with doubled values with sum function
+        Matrix small2 = small.operator+(small);
+        Matrix medium2 = medium.operator+(medium);
+        Matrix large2 = large.operator+(large);
+
+        // Matrices with doubled values manually
+        Matrix small3 = Matrix();
+        Matrix medium3 = Matrix(3, 3);
+        Matrix large3 = Matrix(5, 6);
+
+        // Double values manually
+        EXPECT_TRUE(medium3.set(vector<vector<double>> {
+            {4*2   , 3*2,  -8*2},
+            {-9.0*2, -55*2, 2*2},
+            {18*2  , 19*2,  19*2},
+        }));
+        EXPECT_TRUE(large3.set({
+            {0*2,         1*2,             2*2,             3*2,     4*2,        5*2},
+            {0.0*2,       1.1*2,           2.2*2,           3.3*2,   4.4*2,      -999*2},
+            {-5*2,        -4*2,            -3*2,            -2*2,    -1*2,       0*2},
+            {-1000.01*2,  16*2,            16*2,            23*2,    -849*2,     65*2},
+            {1000000.0*2, 1000001.10981*2, -1651556.4444*2, 19858*2, -651.789*2, 0.000001*2},
+        }));
+
+        EXPECT_TRUE(small2.operator==(small3));
+        EXPECT_TRUE(medium2.operator==(medium3));
+        EXPECT_TRUE(large2.operator==(large3));
+
+        EXPECT_TRUE(small.operator==(small2)); // TRUE because '0 + 0 = 0'
+        EXPECT_FALSE(medium.operator==(medium2));
+        EXPECT_FALSE(large.operator==(large2));
+    });
+
+    EXPECT_THROW(small.operator+(medium), runtime_error);
+    EXPECT_THROW(small.operator+(large), runtime_error);
+    EXPECT_THROW(medium.operator+(small), runtime_error);
+    EXPECT_THROW(medium.operator+(large), runtime_error);
+    EXPECT_THROW(large.operator+(small), runtime_error);
+    EXPECT_THROW(large.operator+(medium), runtime_error);
+}
+
+// Test operator*() 1/2
+TEST_F(MatrixPreset, multiplyMethod) {
+
+}
+
+// Test operator*() 2/2
+TEST_F(MatrixPreset, multiplyMethod) {
+
 }
 
 /*** Konec souboru white_box_tests.cpp ***/
